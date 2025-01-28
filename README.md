@@ -7,14 +7,15 @@ Este proyecto es una aplicación desarrollada con Angular y PrimeNG 17. Incluye 
 - **Node.js**: Versión 18.x o superior.
 - **Angular CLI**: Versión 17.x.
 - **PrimeNG**: Versión 17.x.
+- **Theme PrimeNG**: Bootstrap.
 - **PrimeFlex**: Versión 3.x.
 
 ## Configuración del Proyecto
 
 ### 1. Clonar el Repositorio
 ```bash
-git clone <url-del-repositorio>
-cd <directorio-del-proyecto>
+git clone https://github.com/Steven77dev/sistema-biblioteca-frontend
+cd sistema-biblioteca-frontend
 ```
 
 ### 2. Instalar Dependencias
