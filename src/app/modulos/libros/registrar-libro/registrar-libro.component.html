@@ -1,0 +1,31 @@
+<p-dialog 
+      [(visible)]="visible" 
+      [modal]="true" 
+      [closable]="false" 
+      header="{{ libro ? 'Editar Libro' : 'Nuevo Libro' }}">
+      <form [formGroup]="formulario" (ngSubmit)="guardarAutor()">
+        <div class="p-fluid">
+          <div class="field">
+            <label for="titulo">Título</label>
+            <input id="titulo" pInputText formControlName="titulo" />
+          </div>
+          <div class="field">
+            <label for="isbn">ISBN</label>
+            <input id="isbn" pInputText formControlName="isbn" />
+          </div>
+          <div class="field">
+            <label for="idAutor">Autor</label>
+            <p-dropdown formControlName="idAutor" [options]="autores" 
+            optionValue="id" optionLabel="nombre" appendTo="body" ></p-dropdown>
+          </div>
+          <div class="field">
+            <label for="fechaPublicacion">Fecha de publicación</label>
+            <p-calendar id="fechaPublicacion" appendTo="body"  formControlName="fechaPublicacion"></p-calendar>
+          </div>
+        </div>
+        <div class="flex justify-end mt-4">
+          <button pButton type="button" label="Cancelar" class="p-button-secondary mr-2" (click)="cerrar(false)"></button>
+          <button pButton type="submit" label="Guardar" class="p-button-primary" [disabled]="formulario.invalid"></button>
+        </div>
+      </form>
+    </p-dialog>

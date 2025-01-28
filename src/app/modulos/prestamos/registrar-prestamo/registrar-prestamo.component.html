@@ -1,0 +1,23 @@
+<p-dialog 
+      [(visible)]="visible" 
+      [modal]="true"  [style]="{ width: '20vw' }"  
+      [closable]="false" 
+      header="Nuevo Préstamo">
+      <form [formGroup]="formulario" (ngSubmit)="guardarPrestamo()">
+        <div class="p-fluid">
+          <div class="field">
+            <label for="idLibro">Libro</label>
+            <p-dropdown formControlName="idLibro" [options]="libros" 
+            optionValue="id" optionLabel="titulo" appendTo="body" ></p-dropdown>
+          </div>
+          <div class="field">
+            <label for="fechaPrestamo">Fecha de Préstamo</label>
+            <p-calendar id="fechaPrestamo" formControlName="fechaPrestamo" appendTo="body" [showTime]="true"></p-calendar>
+          </div> 
+        </div>
+        <div class="flex justify-end mt-4">
+          <button pButton type="button" label="Cancelar" class="p-button-secondary mr-2" (click)="cerrar(false)"></button>
+          <button pButton type="submit" label="Guardar" class="p-button-primary" [disabled]="formulario.invalid"></button>
+        </div>
+      </form>
+    </p-dialog>

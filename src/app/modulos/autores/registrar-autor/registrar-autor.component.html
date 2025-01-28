@@ -1,0 +1,26 @@
+<p-dialog 
+      [(visible)]="visible" 
+      [modal]="true" 
+      [closable]="false" 
+      header="{{ autor ? 'Editar Autor' : 'Nuevo Autor' }}">
+      <form [formGroup]="formulario" (ngSubmit)="guardarAutor()">
+        <div class="p-fluid">
+          <div class="field">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" pInputText formControlName="nombre" />
+          </div>
+          <div class="field">
+            <label for="nacionalidad">Nacionalidad</label>
+            <input id="nacionalidad" pInputText formControlName="nacionalidad" />
+          </div>
+          <div class="field">
+            <label for="fechaNacimiento">Fecha de Nacimiento</label>
+            <p-calendar id="fechaNacimiento" appendTo="body"  formControlName="fechaNacimiento"></p-calendar>
+          </div>
+        </div>
+        <div class="flex justify-end mt-4">
+          <button pButton type="button" label="Cancelar" class="p-button-secondary mr-2" (click)="cerrar(false)"></button>
+          <button pButton type="submit" label="Guardar" class="p-button-primary" [disabled]="formulario.invalid"></button>
+        </div>
+      </form>
+    </p-dialog>

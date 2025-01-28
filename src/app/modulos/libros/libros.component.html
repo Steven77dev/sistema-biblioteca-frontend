@@ -1,0 +1,46 @@
+<p-card>
+  <p-toolbar>
+    <div class="p-toolbar-group-left">
+      <span class="p-toolbar-title">Libros</span>
+    </div>
+    <div class="p-toolbar-group-right">
+      <button pButton label="Nuevo" icon="pi pi-plus" (click)="abrirNuevo()"></button>
+    </div>
+  </p-toolbar>
+  <p-table [value]="libros" [paginator]="true" [rows]="10">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Título</th>
+        <th>ISBN</th>
+        <th>Fecha de Publicación</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-autor>
+      <tr>
+        <td>{{ autor.titulo }}</td>
+        <td>{{ autor.isbn }}</td>
+        <td>{{ autor.fechaPublicacion | date: 'dd/MM/yyyy' }}</td>
+        <td>
+          <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2"
+            (click)="editar(autor)"></button>
+          <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger"
+            (click)="confirmarEliminar(autor)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
+
+<app-registrar-libro *ngIf="mostrarModal" [libro]="registroSeleccionado" (cerrarModal)="alCerrarModal($event)"
+  #registrar></app-registrar-libro>
+
+<p-confirmDialog #cd [style]="{ width: '550px' }">
+  <ng-template pTemplate="footer">
+    <button type="button" pButton icon="pi pi-times" class="p-button-danger p-button-raised" label="No"
+      (click)="cd.reject()"></button>
+    <button type="button" pButton icon="pi pi-check" class="p-button-success p-button-raised" label="Sí"
+      (click)="cd.accept()"></button>
+  </ng-template>
+</p-confirmDialog>
+<p-toast></p-toast>
