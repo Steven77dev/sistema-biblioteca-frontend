@@ -1,90 +1,82 @@
-# Sistema de Gestión y Ventas
+# Documentación del Proyecto Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.3.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-# Hospital Nacional Cayetano Heredia - Frontend Angular 15 con PrimeNG
-
-Este repositorio contiene el código fuente y la documentación para el proyecto Frontend de Angular 15 desarrollado con PrimeNG para el Hospital Nacional Cayetano Heredia. Esta aplicación proporciona una interfaz de usuario moderna para mejorar la gestión de datos y servicios médicos en el hospital.
-
-## Características
-
-- Interfaz de usuario intuitiva y fácil de usar.
-- Integración de componentes PrimeNG para una experiencia de usuario mejorada.
-- Agregar las nuevas funcionalidades
+## Resumen
+Este proyecto es una aplicación desarrollada con Angular y PrimeNG 17. Incluye funcionalidades como formularios reactivos, manejo de datos desde servicios, y notificaciones para errores.
 
 ## Requisitos Previos
+- **Node.js**: Versión 18.x o superior.
+- **Angular CLI**: Versión 17.x.
+- **PrimeNG**: Versión 17.x.
+- **PrimeFlex**: Versión 3.x.
 
-Asegúrate de tener las siguientes herramientas instaladas en tu sistema antes de continuar:
+## Configuración del Proyecto
 
-- [Node.js](https://nodejs.org/): Asegúrate de tener Node.js instalado. Puedes descargarlo desde el sitio web oficial.
+### 1. Clonar el Repositorio
+```bash
+git clone <url-del-repositorio>
+cd <directorio-del-proyecto>
+```
 
-- [Angular CLI](https://angular.io/cli): Necesitas Angular CLI para desarrollar y ejecutar la aplicación. Puedes instalarlo globalmente utilizando npm (Node Package Manager) con el siguiente comando:
-`npm install -g @angular/cli@15`
+### 2. Instalar Dependencias
+```bash
+npm install
+```
 
-## Instalación:
+### 3. Ejecutar el Servidor de Desarrollo
+```bash
+npm start
+```
+La aplicación estará disponible en `http://localhost:4200/`.
 
-Sigue estos pasos para configurar y ejecutar el proyecto en tu entorno local:
+## Estructura del Proyecto
+- **src/app**: Contiene los módulos, componentes, servicios y modelos del proyecto.
+  - **modulos**: Pantallas para la visualización del usuario.
+  - **servicios**: Servicios para comunicación con la API.
+  - **models**: Interfaces TypeScript para las estructuras de datos (por ejemplo, `Prestamo`).
 
-1. Clona este repositorio en tu máquina local:
+## Funcionalidades
 
-git clone https://github.com/InformaticaHNCH2/frontend-sigehov3.git
+### 1. Carga de Datos Asíncrona
+Se usan llamadas concurrentes con `forkJoin` para obtener datos de libros, préstamos y autores al mismo tiempo.
 
-2. Navega al directorio del proyecto:
+### 2. Notificaciones
+Se utiliza un servicio personalizado (`mensajeToast`) para mostrar mensajes de error.
 
-cd sigehov3Frontend (por ejemplo)
+### 3. Formularios Reactivos
+El formulario permite registrar y actualizar préstamos:
+```typescript
+this.form = this.fb.group({
+  id: [null],
+  idLibro: [null, Validators.required],
+  fechaPrestamo: [null, Validators.required],
+  fechaDevolucion: [null, Validators.required],
+  estado: ['', Validators.required]
+});
+```
 
-3. Instala las dependencias del proyecto:
+### 4. Componentes de PrimeNG
+- **`p-calendar`**: Selección de fechas.
+- **`p-toast`**: Mostrar mensajes.
+- **`p-dialog`**: Modal para formularios.
+- **`p-table`**: Listado de datos en grilla.
+- **`p-dropdown`**: Listado de datos para seleccionar.
 
-`npm install`
+## Configuración de Entorno
+Crea un archivo en `src/environments/environment.ts` con el siguiente contenido:
+```typescript
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:9098/api' // Cambia esto según tu configuración
+};
+```
 
-4. Inicia la aplicación:
+## Comandos Útiles
+- **Iniciar Servidor**: `npm start`
+- **Construir Proyecto**: `ng build --prod`
 
-`ng serve`
-
-5. Abre tu navegador web y visita `http://localhost:4200` para ver la aplicación en funcionamiento.
-
-## Generar nuevo componente
-
-Ejecutar `ng generate component modulos/nombre-modulo/nombre-componente`
-
-## Generar module y routing de componente creado
-
-Ejecutar `ng generate module modulos/nombre-modulo/nombre-componente --routing`
-
-Ten en cuenta reemplazar nombre-modulo por el nombre del modulo que has creado
-
-
-## Enrutar nuevo componente
-
-Revisar el .ts `/modulos/his/his-routing.module.ts` 
-
-En ella se agrega las opciones (componentes) que serán enrutadas en el módulo 
-
-## Enrutar nuevo módulo
-
-Revisar el .ts `/src/app/app-routing.module.ts` 
-
-En ella se agrega los módulos que serán enrutadas en el menú (`src/app/layout/app.menu.component.ts` )
+## Despliegue
+1. Construir la aplicación:
+   ```bash
+   ng build --prod
+   ```
+2. Subir el contenido de la carpeta `dist/` a tu servidor web.
